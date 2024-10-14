@@ -1,0 +1,25 @@
+<app-register-appointment></app-register-appointment>
+<h2 class="text-center">Citas Medicas</h2>
+<section class="d-flex flex-wrap justify-content-center">
+    <div class="p-2" *ngFor="let appointment of appointments; let i = index">
+        <div class="card relative" style="width: 18rem;">
+            <span class="position-absolute rounded-circle px-2 bg-secondary text-white">{{i+1}}</span>
+            <div class="d-flex justify-content-between p-4">
+                <span>{{formatDate(appointment.appointmentDate)}}</span>
+                <!-- <span>{{appointment.appointmentDate}}</span> -->
+                <span>{{appointment.appointmentTime}}</span>
+            </div>
+            <h2 class="text-center">{{appointment.names}} {{appointment.lastnames}}</h2>
+            <small class="text-center text-secondary font-italic">Edad: {{calculateAge(appointment.birthDate)}} años</small>
+            <div class="card-body">
+                <h5 class="card-title">{{appointment.email}}</h5>
+                <h6>Observaciones:</h6>
+                <p class="card-text">{{appointment.observations}}</p>
+                <div class="d-flex justify-content-between">
+                    <a [routerLink]="['actualiza', i]" class="btn btn-outline-success">Actualizar</a>
+                    <button type="button" (click)="deleteAppointmnet(i)" class="btn btn-outline-danger">Elimnar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
