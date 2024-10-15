@@ -40,7 +40,14 @@ export class AppointmentsService {
   }
 
   deleteAppointmnet(index: number){
-    this.appointments.splice(index, 1);
+    const resultado = window.confirm('¿Estás seguro de que quieres continuar?');
+
+    if (resultado) {
+      this.appointments.splice(index, 1);
+      console.log('El usuario confirmó la acción.');
+    } else {
+      console.log('El usuario canceló la acción.');
+    }
   }
 
   showMessage(message:string){
