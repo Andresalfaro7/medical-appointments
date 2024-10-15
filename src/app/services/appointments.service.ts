@@ -28,6 +28,10 @@ export class AppointmentsService {
     appointmentUpdate.email = appointment.email;
     appointmentUpdate.names = appointment.names;
     appointmentUpdate.lastnames = appointment.lastnames;
+    appointmentUpdate.observations = appointment.observations;
+    appointmentUpdate.birthDate = appointment.birthDate;
+    appointmentUpdate.appointmentDate = appointment.appointmentDate;
+    appointmentUpdate.appointmentTime = appointment.appointmentTime;
   }
 
   findAppointment(index: number){
