@@ -28,7 +28,7 @@ export class HomeComponent {
     this.appointmentsServices.deleteAppointmnet(index);
   }
 
-  calculateAge(birthDate: Date): number {
+  calculateAge(birthDate: Date|string): number {
     const today = new Date();
     const birthDatePerson = new Date(birthDate);
     let age = today.getFullYear() - birthDatePerson.getFullYear();
@@ -40,7 +40,7 @@ export class HomeComponent {
     return age;
   }
 
-  formatDate(date: Date): string {
+  formatDate(date: Date | string): string {
     console.log(date);
     let dateAppointment = new Date(date);
     const day = dateAppointment.getDate().toString().padStart(2, '0');

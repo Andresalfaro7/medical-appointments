@@ -3,11 +3,11 @@ export class RegisterAppoinments {
     names:string = "";
     lastnames:string = "";
     observations: string = "";
-    birthDate: Date;
-    appointmentDate: Date;
+    birthDate: Date | null | string;
+    appointmentDate: Date | null | string;
     appointmentTime: string = "";
 
-    constructor(email:string, names:string,  lastnames:string, observations:string = "Sin observaciones", birthDate:Date, appointmentDate:Date, appointmentTime:string){
+    constructor(email:string, names:string,  lastnames:string, observations:string = "Sin observaciones", birthDate:Date|null|string, appointmentDate:Date|null|string, appointmentTime:string){
         this.email = email;
         this.names = names;
         this.lastnames = lastnames;

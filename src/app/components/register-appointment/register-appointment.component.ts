@@ -20,8 +20,8 @@ export class RegisterAppointmentComponent {
   inputNames: string = "";
   inputLastnames: string = "";
   inputObservations: string = "";
-  inputBirthDate: Date;
-  inputAppointmentDate: Date;
+  inputBirthDate: Date|null;
+  inputAppointmentDate: Date|null;
   inputAppointmentTime: string = "";
   index: number = 0;
   show: string = "";
@@ -37,7 +37,6 @@ export class RegisterAppointmentComponent {
   }
 
   saveAppoinment(){
-    
     let appointment = new RegisterAppoinments(this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
     let validate = this.validateDataServices.validateForms(appointment);
     console.log(validate);
@@ -47,6 +46,13 @@ export class RegisterAppointmentComponent {
     }
     this.appointmentsServices.addRegisterappointment(appointment);
     alert('Cita registrada a nombre de: '+this.inputNames);
+    this.inputEmail= "";
+    this.inputNames= "";
+    this.inputLastnames= "";
+    this.inputObservations= "";
+    this.inputBirthDate = null;
+    this.inputAppointmentDate = null;
+    this.inputAppointmentTime = "";
     this.backToHome();
   }
 

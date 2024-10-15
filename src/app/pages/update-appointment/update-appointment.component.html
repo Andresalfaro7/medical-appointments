@@ -1,25 +1,46 @@
 <section class="container">
-    <form class="container py-5" (ngSubmit)="updateAppoinment()">
+    <form class="container py-5" (ngSubmit)="updateAppointment()">
         <h1 class="text-center">Registros de Citas Medicas</h1>
-        <div class="form-group">
-            <label for="inputEmail">Correo Electrónico</label>
-            <input type="email" class="form-control" id="inputEmail" name="inputEmail" [(ngModel)]="inputEmail"
-                aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-            <label for="inputNames">Nombres</label>
-            <input type="text" class="form-control" id="inputNames" name="inputNames" [(ngModel)]="inputNames"
-                aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-            <label for="inputLastnames">Apellidos</label>
-            <input type="text" class="form-control" id="inputLastnames" name="inputLastnames"
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputNames">Nombres</label>
+                <input type="text" class="form-control" id="inputNames" name="inputNames"
+                [(ngModel)]="inputNames" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputLastnames">Apellidos</label>
+                <input type="text" class="form-control" id="inputLastnames" name="inputLastnames"
                 [(ngModel)]="inputLastnames" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail">Correo Electrónico</label>
+                <input type="email" class="form-control" id="inputEmail" name="inputEmail"
+                [(ngModel)]="inputEmail" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputBirthDate">Fecha de nacimiento</label>
+                <input type="date" class="form-control" id="inputBirthDate" name="inputBirthDate"
+                [(ngModel)]="inputBirthDate" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputAppointmentDate">Fecha de Cita</label>
+                <input type="date" class="form-control" id="inputAppointmentDate" name="inputAppointmentDate"
+                [(ngModel)]="inputAppointmentDate" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAppointmentTime">Hora de Cita</label>
+                <input type="time" class="form-control" id="inputAppointmentTime" name="inputAppointmentTime"
+                [(ngModel)]="inputAppointmentTime" aria-describedby="emailHelp">
+            </div>
         </div>
         <div class="form-group">
             <label for="observations">Observaciones</label>
             <textarea class="form-control" id="observations" name="observations" [(ngModel)]="inputObservations" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="updateAppoinment()">Actualizar</button>
+        <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </section>

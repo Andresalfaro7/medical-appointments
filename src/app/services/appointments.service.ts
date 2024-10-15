@@ -9,13 +9,13 @@ export class AppointmentsService {
   constructor() { }
 
   appointments: RegisterAppoinments[] = [
-    new RegisterAppoinments('1correo@correo.com', 'Andres', 'Alfaro', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('2correo@correo.com', 'Castro', 'Design', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('3correo@correo.com', 'Lopez', 'Analist', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', new Date('10-02-1995'), new Date('12-10-2024'), '14:15'),
+    new RegisterAppoinments('1correo@correo.com', 'Andres', 'Alfaro', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('2correo@correo.com', 'Castro', 'Design', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('3correo@correo.com', 'Lopez', 'Analist', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
   ];
 
   addRegisterappointment(appointment: RegisterAppoinments){

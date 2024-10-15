@@ -5,12 +5,12 @@
         <div class="card relative" style="width: 18rem;">
             <span class="position-absolute rounded-circle px-2 bg-secondary text-white">{{i+1}}</span>
             <div class="d-flex justify-content-between p-4">
-                <span>{{formatDate(appointment.appointmentDate)}}</span>
+                <span>{{appointment.appointmentDate && formatDate(appointment.appointmentDate)}}</span>
                 <!-- <span>{{appointment.appointmentDate}}</span> -->
                 <span>{{appointment.appointmentTime}}</span>
             </div>
             <h2 class="text-center">{{appointment.names}} {{appointment.lastnames}}</h2>
-            <small class="text-center text-secondary font-italic">Edad: {{calculateAge(appointment.birthDate)}} años</small>
+            <small class="text-center text-secondary font-italic">Edad: {{appointment.birthDate && calculateAge(appointment.birthDate)}} años</small>
             <div class="card-body">
                 <h5 class="card-title">{{appointment.email}}</h5>
                 <h6>Observaciones:</h6>
