@@ -22,6 +22,22 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.appointments = this.appointmentsServices.appointments;
+    console.log(this.appointmentsServices.appointments);
+    this.loadAppointments();
+  }
+
+  loadAppointments(): void {
+    this.appointmentsServices.getAppointments().subscribe({
+      next: (data) => {
+        this.appointments = Object.keys(data || {}).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+      },
+      error: (error) => {
+        console.error('Error al cargar citas:', error);
+      }
+    });
   }
 
   deleteAppointmnet(index: number){

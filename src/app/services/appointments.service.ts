@@ -1,26 +1,63 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { RegisterAppoinments } from '../interfaces/register-appointments.model';
+import { FirebaseAppointmentsService } from './firebase-appointments.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentsService {
 
-  constructor() { }
+export class AppointmentsService implements OnInit {
 
-  appointments: RegisterAppoinments[] = [
-    new RegisterAppoinments('1correo@correo.com', 'Andres', 'Alfaro', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('2correo@correo.com', 'Castro', 'Design', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('3correo@correo.com', 'Lopez', 'Analist', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-    new RegisterAppoinments('4correo@correo.com', 'Hernandez', 'Datamaster', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
-  ];
+  constructor(private firebaseAppointments: FirebaseAppointmentsService) { }
+  
+  // appointments: RegisterAppoinments[] = [
+  //   new RegisterAppoinments('1correo@correo.com', 'Andres', 'Alfaro', 'Dolor de cabeza', '10-02-1995', '01-10-2024', '14:15'),
+  //   new RegisterAppoinments('2correo@correo.com', 'Castro', 'Mejia', 'Dolor de cabeza', '10-02-1995', '02-10-2024', '14:15'),
+  //   new RegisterAppoinments('3correo@correo.com', 'Ricardo', 'Lopez', 'Dolor de cabeza', '10-02-1995', '03-10-2024', '14:15'),
+  //   new RegisterAppoinments('4correo@correo.com', 'Roberto', 'Torrez', 'Dolor de cabeza', '10-02-1995', '04-10-2024', '14:15'),
+  //   new RegisterAppoinments('5correo@correo.com', 'Angel', 'Castillo', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+  //   new RegisterAppoinments('6correo@correo.com', 'Elias', 'Vasquez', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+  //   new RegisterAppoinments('7correo@correo.com', 'Rodrigo', 'Gomez', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+  //   new RegisterAppoinments('8correo@correo.com', 'Rodrigo', 'Gomez', 'Dolor de cabeza', '10-02-1995', '12-10-2024', '14:15'),
+  // ];
+  appointments: RegisterAppoinments[] = [];
+  newAppointment = new RegisterAppoinments('', '', '', 'Sin observaciones', null, null, '');
+
+  ngOnInit(): void {
+    // this.loadAppointments();
+  }
+
+  getAppointments(): Observable<any> {
+    return this.firebaseAppointments.getAppointments();
+  }
+
+  // Cargar todas las citas
+  loadAppointments(): void {
+    this.firebaseAppointments.getAppointments().subscribe({
+      next: (data) => {
+        this.appointments = Object.keys(data || {}).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        console.log(this.appointments);
+      },
+      error: (error) => {
+        console.error('Error al cargar citas:', error);
+      }
+    });
+  }
 
   addRegisterappointment(appointment: RegisterAppoinments){
     // this.serviceMessage.showMessage('Nombre ingresado' + employee.name);
     this.appointments.push(appointment);
+
+    this.firebaseAppointments.createAppointment(appointment).subscribe(() => {
+      // this.newAppointment = new RegisterAppoinments('', '', '', 'Sin observaciones', null, null, '');
+      (response: Response) => {console.log(response)}
+      (error: Response) => {console.log(error)}
+      this.loadAppointments();
+    });
   }
 
   updateaAppointment(index: number, appointment: RegisterAppoinments){
