@@ -16,8 +16,8 @@
                 <h6>Observaciones:</h6>
                 <p class="card-text">{{appointment.observations}}</p>
                 <div class="d-flex justify-content-between">
-                    <a [routerLink]="['actualiza', i]" class="btn btn-outline-success">Actualizar</a>
-                    <button type="button" (click)="deleteAppointmnet(i)" class="btn btn-outline-danger">Elimnar</button>
+                    <a [routerLink]="['actualiza', appointment.id]" class="btn btn-outline-success">Actualizar</a>
+                    <button type="button" (click)="deleteAppointment(appointment.id)" class="btn btn-outline-danger">Elimnar</button>
                 </div>
             </div>
         </div>

@@ -11,23 +11,28 @@ export class FirebaseAppointmentsService {
 
   constructor(private http: HttpClient) { }
 
-  // Crear una nueva cita
+  // Create a new appointment
   createAppointment(appointment: RegisterAppoinments): Observable<any> {
     return this.http.post(`${this.dbUrl}.json`, appointment);
   }
 
-  // Leer todas las citas
+  // Get alls appointments
   getAppointments(): Observable<{ [key: string]: RegisterAppoinments }> {
     return this.http.get<{ [key: string]: RegisterAppoinments }>(`${this.dbUrl}.json`);
   }
 
-  // Actualizar una cita por ID
+  // Update appoinment by id
   updateAppointment(id: string, appointment: RegisterAppoinments): Observable<any> {
     return this.http.put(`${this.dbUrl}/${id}.json`, appointment);
   }
 
-  // Eliminar una cita por ID
+  // Delete appointment by id
   deleteAppointment(id: string): Observable<any> {
     return this.http.delete(`${this.dbUrl}/${id}.json`);
+  }
+
+  // get appoinment by id
+  getAppointmentById(id: string): Observable<any> {
+    return this.http.get(`${this.dbUrl}/${id}.json`);
   }
 }

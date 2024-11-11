@@ -23,7 +23,7 @@ export class RegisterAppointmentComponent {
   inputBirthDate: Date|null;
   inputAppointmentDate: Date|null;
   inputAppointmentTime: string = "";
-  index: number = 0;
+  index: string = '';
   show: string = "";
 
   ngOnInit(){
@@ -36,24 +36,51 @@ export class RegisterAppointmentComponent {
     }
   }
 
-  saveAppoinment(){
-    let appointment = new RegisterAppoinments(this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
+  // saveAppoinment(){
+  //   let appointment = new RegisterAppoinments(this.index, this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
+  //   let validate = this.validateDataServices.validateForms(appointment);
+  //   console.log(validate);
+  //   if(!validate){
+  //     alert('Todos los campos son requeridos');
+  //     return;
+  //   }
+  //   this.appointmentsServices.addRegisterappointment(appointment);
+  //   alert('Cita registrada a nombre de: '+this.inputNames);
+  //   this.inputEmail= "";
+  //   this.inputNames= "";
+  //   this.inputLastnames= "";
+  //   this.inputObservations= "";
+  //   this.inputBirthDate = null;
+  //   this.inputAppointmentDate = null;
+  //   this.inputAppointmentTime = "";
+  //   this.backToHome();
+  // }
+
+  saveAppoinment(): void {
+    let appointment = new RegisterAppoinments(this.index, this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
     let validate = this.validateDataServices.validateForms(appointment);
-    console.log(validate);
     if(!validate){
       alert('Todos los campos son requeridos');
       return;
     }
-    this.appointmentsServices.addRegisterappointment(appointment);
-    alert('Cita registrada a nombre de: '+this.inputNames);
-    this.inputEmail= "";
-    this.inputNames= "";
-    this.inputLastnames= "";
-    this.inputObservations= "";
-    this.inputBirthDate = null;
-    this.inputAppointmentDate = null;
-    this.inputAppointmentTime = "";
-    this.backToHome();
+    this.appointmentsServices.addRegisterappointment(appointment).subscribe({
+      next: () => {
+        console.log('Cita creada exitosamente');
+        this.appointmentsServices.loadAppointments();
+        alert('Cita registrada a nombre de: '+this.inputNames);
+        this.inputEmail= "";
+        this.inputNames= "";
+        this.inputLastnames= "";
+        this.inputObservations= "";
+        this.inputBirthDate = null;
+        this.inputAppointmentDate = null;
+        this.inputAppointmentTime = "";
+        this.backToHome();
+      },
+      error: (error) => {
+        console.error('Error al crear cita:', error);
+      }
+    });
   }
 
   backToHome() {

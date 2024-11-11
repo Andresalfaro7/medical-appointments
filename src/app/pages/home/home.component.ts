@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import { RegisterAppointmentComponent } from '../../components/register-appointment/register-appointment.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -29,10 +30,20 @@ export class HomeComponent {
   loadAppointments(): void {
     this.appointmentsServices.getAppointments().subscribe({
       next: (data) => {
-        this.appointments = Object.keys(data || {}).map((key) => ({
-          id: key,
-          ...data[key],
-        }));
+        this.appointments = Object.keys(data || {}).map((key) => {
+          const appointmentData = { ...data[key] };
+          return new RegisterAppoinments(
+            key,
+            appointmentData.email,
+            appointmentData.names,
+            appointmentData.lastnames,
+            appointmentData.observations || 'Sin observaciones',
+            appointmentData.birthDate,
+            appointmentData.appointmentDate,
+            appointmentData.appointmentTime
+          );
+        });
+        console.log(this.appointments);
       },
       error: (error) => {
         console.error('Error al cargar citas:', error);
@@ -40,8 +51,16 @@ export class HomeComponent {
     });
   }
 
-  deleteAppointmnet(index: number){
-    this.appointmentsServices.deleteAppointmnet(index);
+  deleteAppointment(id: string): void {
+    this.appointmentsServices.deleteAppointmnet(id).subscribe({
+      next: () => {
+        console.log('Cita eliminada exitosamente');
+        this.loadAppointments();
+      },
+      error: (error) => {
+        console.error('Error al eliminar cita:', error);
+      }
+    });
   }
 
   calculateAge(birthDate: Date|string): number {
