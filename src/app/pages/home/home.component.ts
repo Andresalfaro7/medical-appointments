@@ -30,19 +30,21 @@ export class HomeComponent {
   loadAppointments(): void {
     this.appointmentsServices.getAppointments().subscribe({
       next: (data) => {
-        this.appointments = Object.keys(data || {}).map((key) => {
-          const appointmentData = { ...data[key] };
-          return new RegisterAppoinments(
-            key,
-            appointmentData.email,
-            appointmentData.names,
-            appointmentData.lastnames,
-            appointmentData.observations || 'Sin observaciones',
-            appointmentData.birthDate,
-            appointmentData.appointmentDate,
-            appointmentData.appointmentTime
-          );
-        });
+        if(data !== null || data !== undefined){
+          this.appointments = Object.keys(data || {}).map((key) => {
+            const appointmentData = { ...data[key] };
+            return new RegisterAppoinments(
+              key,
+              appointmentData.email,
+              appointmentData.names,
+              appointmentData.lastnames,
+              appointmentData.observations || 'Sin observaciones',
+              appointmentData.birthDate,
+              appointmentData.appointmentDate,
+              appointmentData.appointmentTime
+            );
+          });
+        }
         console.log(this.appointments);
       },
       error: (error) => {

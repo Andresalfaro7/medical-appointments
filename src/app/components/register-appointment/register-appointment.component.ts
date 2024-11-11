@@ -18,6 +18,7 @@ export class RegisterAppointmentComponent {
 
   @Output() loadData = new EventEmitter<void>();
   
+  today: string = `${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}-${(new Date()).getDate() < 10 ? '0' + (new Date()).getDate() : (new Date()).getDate()}`;
   inputEmail: string = "";
   inputNames: string = "";
   inputLastnames: string = "";
