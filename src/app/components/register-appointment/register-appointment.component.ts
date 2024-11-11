@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RegisterAppoinments } from '../../interfaces/register-appointments.model';
 import { AppointmentsService } from '../../services/appointments.service';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,8 @@ export class RegisterAppointmentComponent {
 
   constructor(private router: Router, private route:ActivatedRoute, private appointmentsServices: AppointmentsService, private validateDataServices: ValidateDataService){}
 
+  @Output() loadData = new EventEmitter<void>();
+  
   inputEmail: string = "";
   inputNames: string = "";
   inputLastnames: string = "";
@@ -36,25 +38,9 @@ export class RegisterAppointmentComponent {
     }
   }
 
-  // saveAppoinment(){
-  //   let appointment = new RegisterAppoinments(this.index, this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
-  //   let validate = this.validateDataServices.validateForms(appointment);
-  //   console.log(validate);
-  //   if(!validate){
-  //     alert('Todos los campos son requeridos');
-  //     return;
-  //   }
-  //   this.appointmentsServices.addRegisterappointment(appointment);
-  //   alert('Cita registrada a nombre de: '+this.inputNames);
-  //   this.inputEmail= "";
-  //   this.inputNames= "";
-  //   this.inputLastnames= "";
-  //   this.inputObservations= "";
-  //   this.inputBirthDate = null;
-  //   this.inputAppointmentDate = null;
-  //   this.inputAppointmentTime = "";
-  //   this.backToHome();
-  // }
+  loadAppointments(){
+    this.loadData.emit();
+  }
 
   saveAppoinment(): void {
     let appointment = new RegisterAppoinments(this.index, this.inputEmail, this.inputNames, this.inputLastnames, this.inputObservations, this.inputBirthDate, this.inputAppointmentDate, this.inputAppointmentTime);
@@ -75,6 +61,8 @@ export class RegisterAppointmentComponent {
         this.inputBirthDate = null;
         this.inputAppointmentDate = null;
         this.inputAppointmentTime = "";
+        this.show = "collapse";
+        this.loadAppointments();
         this.backToHome();
       },
       error: (error) => {

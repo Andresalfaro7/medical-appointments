@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #EEF5FF !important;
+}
+
+.color-primary{
+    color: #176B87;
+}
+
+.bcg-primary{
+    background-color: #176B87;
+}

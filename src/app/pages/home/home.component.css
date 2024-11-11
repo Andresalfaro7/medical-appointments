@@ -1,0 +1,4 @@
+.shadow-card{
+    -webkit-box-shadow: 6px 5px 15px -4px #86B6F6; 
+    box-shadow: 6px 5px 15px -4px #86B6F6;
+}

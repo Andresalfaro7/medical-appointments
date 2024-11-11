@@ -1,6 +1,6 @@
 <section class="container">
     <form class="container py-5" (ngSubmit)="updateAppointment()">
-        <h1 class="text-center">Actualizar de Cita Médica</h1>
+        <h1 class="text-center color-primary">Actualizar de Cita Médica</h1>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputNames">Nombres</label>
@@ -41,6 +41,6 @@
             <label for="observations">Observaciones</label>
             <textarea class="form-control" id="observations" name="observations" [(ngModel)]="inputObservations" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <button type="submit" class="btn btn-outline-primary">Actualizar</button>
     </form>
 </section>

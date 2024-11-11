@@ -64,6 +64,7 @@ export class HomeComponent {
   }
 
   calculateAge(birthDate: Date|string): number {
+    console.log(birthDate);
     const today = new Date();
     const birthDatePerson = new Date(birthDate);
     let age = today.getFullYear() - birthDatePerson.getFullYear();
@@ -76,7 +77,7 @@ export class HomeComponent {
   }
 
   formatDate(date: Date | string): string {
-    console.log(date);
+    // console.log(date);
     let dateAppointment = new Date(date);
     const day = dateAppointment.getDate().toString().padStart(2, '0');
     const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
