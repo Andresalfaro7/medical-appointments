@@ -30,7 +30,7 @@ export class RegisterAppointmentComponent {
   show: string = "";
 
   ngOnInit(){
-    console.log(this.route.snapshot.params['show']);
+    // console.log(this.route.snapshot.params['show']);
     this.show = this.route.snapshot.params['show'];
     if(this.show === "true"){
       this.show = "collapse show";

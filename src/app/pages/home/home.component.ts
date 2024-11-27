@@ -66,7 +66,7 @@ export class HomeComponent {
   }
 
   calculateAge(birthDate: Date|string): number {
-    console.log(birthDate);
+    // console.log(birthDate);
     const today = new Date();
     const birthDatePerson = new Date(birthDate);
     let age = today.getFullYear() - birthDatePerson.getFullYear();

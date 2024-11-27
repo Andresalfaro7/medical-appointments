@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {RegisterAppoinments} from '../interfaces/register-appointments.model';
+import { LoginService } from '../pages/login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {RegisterAppoinments} from '../interfaces/register-appointments.model';
 export class FirebaseAppointmentsService {
   private dbUrl = 'https://andres-alfaro-ing-default-rtdb.firebaseio.com/navidad';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { }
 
   // Create a new appointment
   createAppointment(appointment: RegisterAppoinments): Observable<any> {
@@ -18,7 +19,8 @@ export class FirebaseAppointmentsService {
 
   // Get alls appointments
   getAppointments(): Observable<{ [key: string]: RegisterAppoinments }> {
-    return this.http.get<{ [key: string]: RegisterAppoinments }>(`${this.dbUrl}.json`);
+    const token = this.loginService.getIdToken();
+    return this.http.get<{ [key: string]: RegisterAppoinments }>(`${this.dbUrl}.json?auth=${token}`);
   }
 
   // Update appoinment by id
