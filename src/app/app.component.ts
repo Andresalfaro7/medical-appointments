@@ -13,23 +13,25 @@ import firebase from 'firebase/compat/app';
 })
 export class AppComponent implements OnInit{
   title = 'Citas Médicas';
-  auth: boolean = false;
-
+  
+  constructor(private loginService: LoginService, private router: Router){ }
+  
   ngOnInit(): void {
     firebase.initializeApp({
       apiKey: "AIzaSyChXa3bg5jKy8IqcRSFD4D__zkVJGLbh7U",
       authDomain: "andres-alfaro-ing.firebaseapp.com",
     });
+
+    !this.isAuth() && this.router.navigate(['/login']);
   }
 
-  constructor(private loginService: LoginService, private router: Router){ }
 
   isAuth(){
+    console.log("HOME");
     return this.loginService.isAuth();
   }
 
   logOut(){
-    this.auth = false;
     this.loginService.logout();
   }
 }
